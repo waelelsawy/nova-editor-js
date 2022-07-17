@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Advoor\NovaEditorJs\Http\Controllers;
 
 use Illuminate\Routing\Controller;
@@ -14,7 +16,6 @@ class EditorJsImageUploadController extends Controller
     /**
      * Upload file
      *
-     * @param NovaRequest $request
      * @return array
      */
     public function file(NovaRequest $request)
@@ -35,7 +36,6 @@ class EditorJsImageUploadController extends Controller
         );
 
         if (config('nova-editor-js.toolSettings.image.disk') !== 'local') {
-
             $tempPath = $request->file('image')->store(
                 config('nova-editor-js.toolSettings.image.path'),
                 'local'
@@ -61,7 +61,6 @@ class EditorJsImageUploadController extends Controller
     }
 
     /**
-     * @param NovaRequest $request
      * @return array
      */
     public function url(NovaRequest $request)
@@ -79,7 +78,7 @@ class EditorJsImageUploadController extends Controller
                         'image/gif',
                         'image/png',
                         'image/svg+xml',
-                    ])) {
+                    ], true)) {
                         $fail($attribute . ' is invalid.');
                     }
                 },
@@ -122,8 +121,9 @@ class EditorJsImageUploadController extends Controller
                 $imageSettings = $alterations;
             }
 
-            if (empty($imageSettings))
+            if (empty($imageSettings)) {
                 return;
+            }
 
             if (!empty($imageSettings['resize']['width'])) {
                 $image->width($imageSettings['resize']['width']);
@@ -169,7 +169,6 @@ class EditorJsImageUploadController extends Controller
             }
 
             $image->save();
-
         } catch (InvalidManipulation $exception) {
             report($exception);
         }

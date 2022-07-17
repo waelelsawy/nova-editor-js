@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Advoor\NovaEditorJs\Http\Controllers;
 
 use Illuminate\Routing\Controller;
@@ -11,7 +13,6 @@ class EditorJsLinkController extends Controller
     /**
      * Upload file
      *
-     * @param NovaRequest $request
      * @return array
      */
     public function fetch(NovaRequest $request)
@@ -56,7 +57,7 @@ class EditorJsLinkController extends Controller
             ]
         ];
 
-        if (!empty($imageUrl)){
+        if (!empty($imageUrl)) {
             $results['meta']['image'] = [
                 'url' => $imageUrl,
             ];
