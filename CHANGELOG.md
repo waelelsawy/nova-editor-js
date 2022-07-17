@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED]
 
+### Added
+- Added `php-cs-fixer` for code standards
+- Added `php-parallel-lint` to ensure all files are actually valid PHP code
+
 ## [3.0.3]
 
 ### Fixed
